@@ -1,0 +1,14 @@
+default: &default
+  host: localhost
+  port: 50001
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
+  host: <%= ENV['ELECTRS_HOST'] %>
+  port: <%= ENV['ELECTRS_PORT'] %>
