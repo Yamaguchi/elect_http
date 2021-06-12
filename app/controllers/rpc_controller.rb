@@ -10,9 +10,8 @@ class RpcController < ApplicationController
     client = Electrb::Client.new(config[:host], config[:port])
     response = client.request(params[:method], *params[:params])
     pp response
-    render json: response.to_json
+    render json: { "jsonrpc": "2.0", id: params[:id], "result": response.to_json }
   rescue => e
-    pp e.backtrace
-    render json: { message: e.message }
+    raise e
   end  
 end
